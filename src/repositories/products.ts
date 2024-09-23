@@ -1,8 +1,7 @@
 import { Product } from '../models/Product';
 import { v4 as uuidv4 } from 'uuid';
 import { mapProduct } from '../utils/productMapper';
-
-const availableProducts = new Map<string, Product>();
+import { availableProducts } from '../database/db';
 
 export const getAllProducts = () => {
 	// Convert the Map to an array of products using the mapProduct function

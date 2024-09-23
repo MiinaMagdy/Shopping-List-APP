@@ -54,13 +54,13 @@ A simple application to manage your shopping list. You can add, remove, and view
   	{
   		"id": "c2662547-f442-427d-82ca-cf26e2ac5d7b",
   		"name": "Milk 🥛",
-  		"quantity": 2,
+  		"stock": 2,
   		"price": 12.5
   	},
   	{
   		"id": "f95cefea-a589-4c70-8a92-e17a6cfbade2",
   		"name": "Bread 🍞",
-  		"quantity": 1,
+  		"stock": 1,
   		"price": 5
   	}
   ]
@@ -77,7 +77,7 @@ A simple application to manage your shopping list. You can add, remove, and view
   {
   	"id": "c2662547-f442-427d-82ca-cf26e2ac5d7b",
   	"name": "Milk 🥛",
-  	"quantity": 2,
+  	"stock": 2,
   	"price": 12.5
   }
   ```
@@ -100,7 +100,7 @@ A simple application to manage your shopping list. You can add, remove, and view
   ```json
   {
   	"name": "Eggs 🥚",
-  	"quantity": 12,
+  	"stock": 12,
   	"price": 2.5
   }
   ```
@@ -110,7 +110,7 @@ A simple application to manage your shopping list. You can add, remove, and view
   {
   	"id": "1311a25a-4e08-4518-b0c5-dfe6e9385926",
   	"name": "Eggs 🥚",
-  	"quantity": 12,
+  	"stock": 12,
   	"price": 2.5
   }
   ```
@@ -155,7 +155,7 @@ A simple application to manage your shopping list. You can add, remove, and view
   ```json
   {
   	"name": "Butter 🧈",
-  	"quantity": 2,
+  	"stock": 2,
   	"price": 3.5
   }
   ```
@@ -165,7 +165,7 @@ A simple application to manage your shopping list. You can add, remove, and view
   {
   	"id": "f33bda3a-c7fa-42f1-ad95-5692d0abe35d",
   	"name": "Butter 🧈",
-  	"quantity": 2,
+  	"stock": 2,
   	"price": 3.5
   }
   ```

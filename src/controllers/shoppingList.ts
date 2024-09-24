@@ -47,7 +47,9 @@ export const addProductToShoppingList = (
 ) => {
 	try {
 		const { productId, quantity } = req.body;
+		// Check if the product exists and if there is enough stock, then add the product to the shopping list
 		productsService.changeStock(productId, -quantity);
+		// If the product is already in the shopping list, add the quantity to the existing quantity
 		shoppingListService.addProductToShoppingList(productId, quantity);
 		res.status(201).json({ message: 'Product added to shopping list' });
 	} catch (error) {
@@ -62,10 +64,12 @@ export const removeProductFromShoppingList = (
 ) => {
 	try {
 		const { productId } = req.params;
+		// Remove the product from the shopping list and return the quantity, if the product is not found, throw a NotFoundException
 		const quantity =
 			shoppingListService.removeProductFromShoppingList(productId);
+		// Add the quantity back to the stock
 		productsService.changeStock(productId, +quantity);
-		res.status(200).json({ message: 'Product removed from shopping list' });
+		res.status(204).end();
 	} catch (error) {
 		next(error);
 	}

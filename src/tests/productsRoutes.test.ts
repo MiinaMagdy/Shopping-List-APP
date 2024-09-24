@@ -170,6 +170,7 @@ describe('DELETE /api/products/:id', () => {
 
 		// Assert
 		expect(response.status).toBe(204);
+		expect(response.body).toMatchObject({});
 	});
 
 	it('should return a 422 error if the productId is invalid uuid', async () => {

@@ -14,6 +14,7 @@ export const getShoppingList = (
 ) => {
 	try {
 		const shoppingListPair = shoppingListService.getShoppingList();
+		let totalPrice = 0;
 		const shoppingList: ShoppingList[] = shoppingListPair
 			.filter(([productId]) => {
 				// if the product does not exist, remove it from the shopping list (Lazy deletion)
@@ -26,12 +27,14 @@ export const getShoppingList = (
 			.map(([productId, quantity]) => {
 				// Get the product by its ID, and return an object with the product and the quantity
 				const product = productsService.getProductById(productId);
+				totalPrice += product.price * quantity;
 				return {
 					...product,
 					quantity,
 				};
 			});
-		res.status(200).json(shoppingList);
+		totalPrice = Math.round(totalPrice * 100) / 100;
+		res.status(200).json({ shoppingList, totalPrice });
 	} catch (error) {
 		next(error);
 	}

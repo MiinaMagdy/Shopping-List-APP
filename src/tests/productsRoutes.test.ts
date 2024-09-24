@@ -119,3 +119,67 @@ describe('GET /api/products/', () => {
 		expect(response.body[0]).toMatchObject(product);
 	});
 });
+
+describe('PATCH /api/products/:id', () => {
+	it('should update a product', async () => {
+		// Arrange
+		const products = await request(app).get('/api/products');
+		const productId = products.body[0].id;
+
+		// Act
+		const response = await request(app)
+			.patch(`/api/products/${productId}`)
+			.send({ price: 20 });
+
+		// Assert
+		expect(response.status).toBe(200);
+		expect(response.body).toMatchObject({ price: 20 });
+		expect(response.body).toHaveProperty('id');
+	});
+
+	it('should return a 422 error if the product is invalid', async () => {
+		// Arrange
+		const products = await request(app).get('/api/products');
+		const productId = products.body[0].id;
+		const product = {
+			price: -10,
+		};
+		const errors = ['body.price Number must be greater than 0'];
+
+		// Act
+		const response = await request(app)
+			.patch(`/api/products/${productId}`)
+			.send(product);
+
+		// Assert
+		expect(response.status).toBe(422);
+		expect(response.body).toHaveProperty('message');
+		expect(response.body.status).toBe('fail');
+		expect(response.body.errors).toEqual(errors);
+	});
+});
+
+describe('DELETE /api/products/:id', () => {
+	it('should delete a product', async () => {
+		// Arrange
+		const products = await request(app).get('/api/products');
+		const productId = products.body[0].id;
+
+		// Act
+		const response = await request(app).delete(`/api/products/${productId}`);
+
+		// Assert
+		expect(response.status).toBe(204);
+	});
+
+	it('should return a 422 error if the productId is invalid uuid', async () => {
+		// Arrange
+		const productId = 'invalid-uuid';
+
+		// Act
+		const response = await request(app).delete(`/api/products/${productId}`);
+
+		// Assert
+		expect(response.status).toBe(422);
+	});
+});

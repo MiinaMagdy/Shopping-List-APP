@@ -1,5 +1,7 @@
 # 🛒 Shopping-List-APP
+
 ![Testing workflow](https://github.com/MiinaMagdy/Shopping-List-APP/actions/workflows/test.yml/badge.svg) [![pages-build-deployment](https://github.com/MiinaMagdy/Shopping-List-APP/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/MiinaMagdy/Shopping-List-APP/actions/workflows/pages/pages-build-deployment)
+
 ## 📄 Description
 
 A simple application to manage your shopping list. You can add, remove, and view products in your shopping list.
@@ -133,11 +135,11 @@ A simple application to manage your shopping list. You can add, remove, and view
 - **Description**: Remove a product from the available products by ID.
 - **Status Code**: ![Static Badge](<https://img.shields.io/badge/204-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
 - **Response**:
+
   ```json
-  {
-  	"message": "Product deleted successfully"
-  }
+
   ```
+
 - **Status Code**: ![Static Badge](<https://img.shields.io/badge/404-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
 - **Response**:
   ```json
@@ -261,11 +263,11 @@ A simple application to manage your shopping list. You can add, remove, and view
 - **Description**: Remove a product from the shopping list by product ID.
 - **Status Code**: ![Static Badge](<https://img.shields.io/badge/204-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
 - **Response**:
+
   ```json
-  {
-  	"message": "Product deleted successfully"
-  }
+
   ```
+
 - **Status Code**: ![Static Badge](<https://img.shields.io/badge/404-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
 - **Response**:
   ```json

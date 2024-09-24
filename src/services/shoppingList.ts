@@ -16,7 +16,7 @@ export const removeProductFromShoppingList = (productId: string) => {
 	const quantity =
 		shoppingListRepository.removeProductFromShoppingList(productId);
 	if (!quantity) {
-		throw new NotFoundException('Product not found');
+		throw new NotFoundException(`Product with id ${productId} not found`);
 	}
 	return quantity;
 };

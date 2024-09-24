@@ -40,6 +40,8 @@ A simple application to manage your shopping list. You can add, remove, and view
 
 **API URL** = `http://localhost:3000/api`
 
+---
+
 ### Products Endpoints
 
 #### 🗄️ Get All Products
@@ -185,5 +187,100 @@ A simple application to manage your shopping list. You can add, remove, and view
   	"status": "fail",
   	"message": "Invalid input.",
   	"errors": ["body.name Name must be at least 2 characters long."]
+  }
+  ```
+
+---
+
+### Shopping List Endpoints
+
+#### 🗄️ Get Shopping List
+
+- **Path**: `/shopping-list`
+- **Method**: `GET`
+- **Description**: Retrieve all products in the shopping list.
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/200-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"shoppingList": [
+  		{
+  			"id": "e7cd280d-779a-4a41-8b58-621d85beb4e2",
+  			"name": "Strawberry 🍓",
+  			"price": 20.95,
+  			"stock": 11,
+  			"quantity": 19
+  		},
+  		{
+  			"id": "3bcabc5f-cb92-4cce-8e59-1df921871d8b",
+  			"name": "Meat 🥩",
+  			"price": 205,
+  			"stock": 2,
+  			"quantity": 2
+  		}
+  	],
+  	"totalPrice": 808.05
+  }
+  ```
+
+#### ➕ Add a Product to Shopping List
+
+- **Path**: `/shopping-list/:productId`
+- **Method**: `POST`
+- **Description**: Add a product to the shopping list by product ID.
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/201-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"message": "Product added to shopping list"
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/404-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Product with id f95cefea-a589-4c70-8a92-e17a6cfbade2 not found",
+  	"errors": []
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/422-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Invalid input.",
+  	"errors": ["params.id Invalid uuid"]
+  }
+  ```
+
+#### ❌ Remove a Product from Shopping List
+
+- **Path**: `/shopping-list/:productId`
+- **Method**: `DELETE`
+- **Description**: Remove a product from the shopping list by product ID.
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/204-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"message": "Product deleted successfully"
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/404-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Product with id f95cefea-a589-4c70-8a92-e17a6cfbade2 not found",
+  	"errors": []
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/422-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Invalid input.",
+  	"errors": ["params.id Invalid uuid"]
   }
   ```

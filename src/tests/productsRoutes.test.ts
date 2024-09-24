@@ -63,3 +63,59 @@ describe('POST /api/products', () => {
 		expect(response.body.errors).toEqual(errors);
 	});
 });
+
+describe('GET /api/products/:id', () => {
+	it('should return a product', async () => {
+		// Arrange
+		const products = await request(app).get('/api/products');
+		const productId = products.body[0].id;
+
+		// Act
+		const response = await request(app).get(`/api/products/${productId}`);
+
+		// Assert
+		expect(response.status).toBe(200);
+		expect(response.body).toMatchObject(products.body[0]);
+	});
+
+	it('should return a 422 error if the productId is invalid uuid', async () => {
+		// Arrange
+		const productId = 'invalid-uuid';
+
+		// Act
+		const response = await request(app).get(`/api/products/${productId}`);
+
+		// Assert
+		expect(response.status).toBe(422);
+	});
+
+	it('should return a 404 error if the product does not exist', async () => {
+		// Arrange
+		const productId = '00000000-0000-0000-0000-000000000000';
+
+		// Act
+		const response = await request(app).get(`/api/products/${productId}`);
+
+		// Assert
+		expect(response.status).toBe(404);
+	});
+});
+
+describe('GET /api/products/', () => {
+	it('should return an array with one product', async () => {
+		// Arrange
+		const product: Product = {
+			name: 'Product 1',
+			price: 10,
+			stock: 10,
+		};
+
+		// Act
+		const response = await request(app).get('/api/products');
+
+		// Assert
+		expect(response.status).toBe(200);
+		expect(response.body).toHaveLength(1);
+		expect(response.body[0]).toMatchObject(product);
+	});
+});

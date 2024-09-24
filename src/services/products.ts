@@ -1,6 +1,6 @@
 import { Product } from '../models/Product';
 import * as productsRepository from '../repositories/products';
-import { NotFoundException } from '../utils/HttpException';
+import { BadRequestException, NotFoundException } from '../utils/HttpException';
 
 export const getAllProducts = () => {
 	return productsRepository.getAllProducts();
@@ -15,6 +15,10 @@ export const getProductById = (id: string) => {
 	}
 
 	return product;
+};
+
+export const hasProduct = (id: string) => {
+	return productsRepository.hasProduct(id);
 };
 
 export const createProduct = (productEntry: Product) => {
@@ -39,4 +43,22 @@ export const deleteProduct = (id: string) => {
 	if (!deletedProduct) {
 		throw new NotFoundException(`Product with id ${id} not found`);
 	}
+};
+
+export const changeStock = (id: string, deltaQuantity: number) => {
+	const product = productsRepository.getProductById(id);
+
+	// If the product is not found, throw a NotFoundException
+	if (!product) {
+		throw new NotFoundException(`Product with id ${id} not found`);
+	}
+	if (product.stock + deltaQuantity < 0) {
+		throw new BadRequestException('Not enough stock');
+	}
+
+	const updatedProduct = productsRepository.updateProduct(id, {
+		stock: product.stock + deltaQuantity,
+	});
+
+	return updatedProduct;
 };

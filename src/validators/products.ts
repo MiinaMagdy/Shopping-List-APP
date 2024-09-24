@@ -6,7 +6,7 @@ export const createProductSchema = z.object({
 			.string()
 			.min(2, { message: 'Name must be at least 2 characters long.' }),
 		price: z.number().positive(),
-		stock: z.number().positive().int(),
+		stock: z.number().nonnegative().int(),
 	}),
 });
 
@@ -24,7 +24,7 @@ export const updateProductSchema = z
 				.min(2, { message: 'Name must be at least 2 characters long.' })
 				.optional(),
 			price: z.number().positive().optional(),
-			stock: z.number().positive().int().optional(),
+			stock: z.number().nonnegative().int().optional(),
 		}),
 	})
 	.merge(productIdSchema);

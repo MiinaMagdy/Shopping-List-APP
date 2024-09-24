@@ -19,6 +19,10 @@ export const getProductById = (id: string) => {
 	return mapProduct([id, product]);
 };
 
+export const hasProduct = (id: string) => {
+	return availableProducts.has(id);
+};
+
 export const createProduct = (product: Product) => {
 	// Generate a unique ID for the product
 	const id = uuidv4();

@@ -1,5 +1,5 @@
 # 🛒 Shopping-List-APP
-![Testing workflow](https://github.com/MiinaMagdy/Shopping-List-APP/actions/workflows/test.yml/badge.svg)
+![Testing workflow](https://github.com/MiinaMagdy/Shopping-List-APP/actions/workflows/test.yml/badge.svg) [![pages-build-deployment](https://github.com/MiinaMagdy/Shopping-List-APP/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/MiinaMagdy/Shopping-List-APP/actions/workflows/pages/pages-build-deployment)
 ## 📄 Description
 
 A simple application to manage your shopping list. You can add, remove, and view products in your shopping list.

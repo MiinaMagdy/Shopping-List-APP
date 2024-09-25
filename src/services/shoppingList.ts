@@ -20,3 +20,15 @@ export const removeProductFromShoppingList = (productId: string) => {
 	}
 	return quantity;
 };
+
+export const applyPromoCode = (promoCode: string) => {
+	return shoppingListRepository.updatePromoCode(promoCode);
+};
+
+export const removePromoCode = () => {
+	return shoppingListRepository.removePromoCode();
+};
+
+export const getPromoCode = () => {
+	return shoppingListRepository.getPromoCode();
+};

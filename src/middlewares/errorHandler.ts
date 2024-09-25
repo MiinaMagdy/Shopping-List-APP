@@ -1,5 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import { HttpException, InternalServerException } from '../utils/HttpException';
+import {
+	BadRequestException,
+	HttpException,
+	InternalServerException,
+} from '../utils/HttpException';
 
 export const errorHandler = (
 	error: unknown,
@@ -9,6 +13,11 @@ export const errorHandler = (
 ) => {
 	if (error instanceof HttpException) {
 		return res.status(error.statusCode).json(error.serialize());
+	}
+
+	if (error instanceof SyntaxError) {
+		const badRequest = new BadRequestException(error.message);
+		return res.status(badRequest.statusCode).json(badRequest.serialize());
 	}
 
 	console.error(error);

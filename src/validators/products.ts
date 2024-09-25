@@ -1,13 +1,15 @@
 import { z } from 'zod';
 
+export const productSchema = z.object({
+	name: z
+		.string()
+		.min(2, { message: 'Name must be at least 2 characters long.' }),
+	price: z.number().positive(),
+	stock: z.number().nonnegative().int(),
+});
+
 export const createProductSchema = z.object({
-	body: z.object({
-		name: z
-			.string()
-			.min(2, { message: 'Name must be at least 2 characters long.' }),
-		price: z.number().positive(),
-		stock: z.number().nonnegative().int(),
-	}),
+	body: productSchema,
 });
 
 export const productIdSchema = z.object({
@@ -18,14 +20,7 @@ export const productIdSchema = z.object({
 
 export const updateProductSchema = z
 	.object({
-		body: z.object({
-			name: z
-				.string()
-				.min(2, { message: 'Name must be at least 2 characters long.' })
-				.optional(),
-			price: z.number().positive().optional(),
-			stock: z.number().nonnegative().int().optional(),
-		}),
+		body: productSchema.partial(),
 	})
 	.merge(productIdSchema);
 

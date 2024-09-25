@@ -234,3 +234,64 @@ describe('DELETE /api/shopping-list/:productId', () => {
 		});
 	});
 });
+
+// POST api/shopping-list/promocodes (apply a promo code)
+describe('POST api/shopping-list/promocodes', () => {
+	it('should apply a promo code', async () => {
+		// Arrange
+		const promoCodeReq = {
+			name: 'PROMO_CODE',
+			percentage: 0.1,
+		};
+		await request(app).post('/api/promocodes').send(promoCodeReq);
+		const promoCode = promoCodeReq.name;
+
+		// Act
+		const response = await request(app).post(
+			'/api/shopping-list/promocodes/' + promoCode,
+		);
+
+		// Assert
+		expect(response.status).toBe(200);
+		expect(response.body).toMatchObject({ message: 'Promo code applied' });
+	});
+
+	it('should return a 422 error if the promo code is invalid', async () => {
+		// Arrange
+		const promoCode = 'invalid-promo-code';
+
+		// Act
+		const response = await request(app).post(
+			'/api/shopping-list/promocodes/' + promoCode,
+		);
+
+		// Assert
+		expect(response.status).toBe(422);
+		expect(response.body).toMatchObject({
+			status: 'fail',
+			message: 'Invalid input.',
+			errors: ['params.name Invalid'],
+		});
+	});
+});
+
+// DELETE api/shopping-list/promocodes (remove applied promo code)
+describe('DELETE api/shopping-list/promocodes', () => {
+	it('should remove applied promo code', async () => {
+		// Arrange
+		const promoCodeReq = {
+			name: 'PROMO_CODE',
+			percentage: 0.1,
+		};
+		await request(app).post('/api/promocodes').send(promoCodeReq);
+		const promoCode = promoCodeReq.name;
+		await request(app).post('/api/shopping-list/promocodes/' + promoCode);
+
+		// Act
+		const response = await request(app).delete('/api/shopping-list/promocodes');
+
+		// Assert
+		expect(response.status).toBe(204);
+		expect(response.body).toMatchObject({});
+	});
+});

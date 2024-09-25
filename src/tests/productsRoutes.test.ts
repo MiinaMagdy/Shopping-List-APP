@@ -32,7 +32,7 @@ describe('POST /api/products', () => {
 
 		// Act
 		const response = await request(app).post('/api/products').send(product);
-
+		console.log(response.body);
 		// Assert
 		expect(response.status).toBe(201);
 		expect(response.body).toHaveProperty('id');

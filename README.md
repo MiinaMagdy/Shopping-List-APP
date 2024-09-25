@@ -286,3 +286,181 @@ A simple application to manage your shopping list. You can add, remove, and view
   	"errors": ["params.id Invalid uuid"]
   }
   ```
+
+#### 🛍️ Apply Promo Code
+
+- **Path**: `/shopping-list/promocodes/:name`
+- **Method**: `POST`
+- **Description**: Apply a promo code with a specific name to the shopping list.
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/200-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"message": "Promo code applied"
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/404-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Promo code with name NOT_FOUND_PROMO_CODE not found",
+  	"errors": []
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/422-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Invalid input.",
+  	"errors": ["params.name Name must be at least 2 characters long."]
+  }
+  ```
+
+#### ❌ Remove Applied Promo Code
+
+- **Path**: `/shopping-list/promocodes`
+- **Method**: `DELETE`
+- **Description**: Remove the currently applied promo code from the shopping list.
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/204-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
+- **Response**:
+
+  ```json
+
+  ```
+
+---
+
+### Promo Codes Endpoints
+
+#### 🗄️ Get All Promo Codes
+
+- **Path**: `/promocodes`
+- **Method**: `GET`
+- **Description**: Retrieve all available promo codes.
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/200-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
+- **Response**:
+  ```json
+  [
+  	{
+  		"id": "e7cd280d-779a-4a41-8b58-621d85beb4e2",
+  		"name": "10OFF",
+  		"percentage": 0.1
+  	},
+  	{
+  		"id": "3bcabc5f-cb92-4cce-8e59-1df921871d8b",
+  		"name": "20OFF",
+  		"percentage": 0.2
+  	}
+  ]
+  ```
+
+#### 🗃️ Get a Promo Code
+
+- **Path**: `/promocodes/:name`
+- **Method**: `GET`
+- **Description**: Retrieve a promo code by name.
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/200-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"id": "e7cd280d-779a-4a41-8b58-621d85beb4e2",
+  	"name": "10OFF",
+  	"percentage": 0.1
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/404-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Promo code with name NOT_FOUND_PROMO_CODE not found",
+  	"errors": []
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/422-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Invalid input.",
+  	"errors": [
+  		"body.name Name must only contain uppercase letters and numbers."
+  	]
+  }
+  ```
+
+#### ➕ Add a Promo Code
+
+- **Path**: `/promocodes`
+- **Method**: `POST`
+- **Description**: Add a new promo code.
+- **Request Body**:
+  ```json
+  {
+  	"name": "30OFF",
+  	"percentage": 0.3
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/201-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"message": "Promo code created"
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/422-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Invalid input.",
+  	"errors": [
+  		"body.name Name must only contain uppercase letters and numbers."
+  	]
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/409-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Promo code with name 30OFF already exists",
+  	"errors": []
+  }
+  ```
+
+#### ❌ Remove a Promo Code
+
+- **Path**: `/promocodes/:name`
+- **Method**: `DELETE`
+- **Description**: Remove a promo code by name.
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/204-a?style=plastic&color=rgb(55%2C%20239%2C%200)>)
+- **Response**:
+
+  ```json
+
+  ```
+
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/404-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Promo code with name 'NOT_FOUND_PROMO_CODE not found",
+  	"errors": []
+  }
+  ```
+- **Status Code**: ![Static Badge](<https://img.shields.io/badge/422-a?style=plastic&color=rgb(239%2C%2055%2C%200)>)
+- **Response**:
+  ```json
+  {
+  	"status": "fail",
+  	"message": "Invalid input.",
+  	"errors": [
+  		"body.name String must contain at least 2 character(s)",
+  		"body.name Name must only contain uppercase letters and numbers."
+  	]
+  }
+  ```

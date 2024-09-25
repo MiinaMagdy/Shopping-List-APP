@@ -5,6 +5,7 @@ import {
 	addProductToShoppingListSchema,
 	removeProductFromShoppingListSchema,
 } from '../validators/shoppingList';
+import { promoCodeNameSchema } from '../validators/promoCodes';
 
 const router = Router();
 
@@ -14,6 +15,15 @@ router
 	.post(
 		validateResource(addProductToShoppingListSchema),
 		shoppingListController.addProductToShoppingList,
+	);
+
+router.route('/promocodes').delete(shoppingListController.removePromoCode);
+
+router
+	.route('/promocodes/:name')
+	.post(
+		validateResource(promoCodeNameSchema),
+		shoppingListController.applyPromoCode,
 	);
 
 router

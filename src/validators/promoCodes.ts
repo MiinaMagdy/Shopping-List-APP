@@ -10,7 +10,10 @@ const promoCodeSchema = z.object({
 		.string()
 		.min(2)
 		.max(255)
-		.regex(/^[A-Z0-9_]+$/),
+		.regex(
+			/^[A-Z0-9_]+$/,
+			'Name must only contain uppercase letters and numbers.',
+		),
 	percentage: z.number().min(0).max(1),
 });
 

@@ -270,7 +270,9 @@ describe('POST api/shopping-list/promocodes', () => {
 		expect(response.body).toMatchObject({
 			status: 'fail',
 			message: 'Invalid input.',
-			errors: ['params.name Invalid'],
+			errors: [
+				'params.name Name must only contain uppercase letters and numbers.',
+			],
 		});
 	});
 });

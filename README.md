@@ -153,7 +153,7 @@ A simple application to manage your shopping list. You can add, remove, and view
 #### 🔄 Update a Product
 
 - **Path**: `/products/:id`
-- **Method**: `PUT`
+- **Method**: `PATCH`
 - **Description**: Update a product in the available products by ID.
 - **Request Body**:
   ```json
